@@ -1,16 +1,83 @@
-# even_hub
+# 🎉 EventHub – Frontend (Flutter)
 
-A new Flutter project.
+EventHub is a modern web application designed to **explore, create, and manage events** with role-based access.  
+This repository contains the **frontend** of the EventHub system, developed using **Flutter Web**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+### 🌐 Public Users
+- Explore published events
+- View event details
+- Responsive and user-friendly UI
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 👤 Registered Users
+- Secure login & registration with form validation
+- User dashboard panel
+- Create and publish own events
+- Update and delete own events
+- JWT-based authentication handling
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 🛠️ Admin Users
+- Admin dashboard
+- Manage all users in the system
+- View, update, and delete all events
+- Full system control with role-based access
+
+---
+
+## 🧰 Tech Stack
+
+| Technology | Description |
+|---------|-------------|
+| **Flutter** | Frontend framework |
+| **Dart** | Programming language |
+| **Flutter Web** | Web deployment |
+| **REST API** | Backend communication |
+| **JWT Authentication** | Secure user authentication |
+| **Material UI** | Clean and modern UI design |
+
+---
+
+## 🔐 Authentication & Security
+
+- Uses **JWT (JSON Web Token)** for authentication
+- Tokens are securely stored and attached to API requests
+- Role-based UI rendering (**Admin / User**)
+- Session handling with protected routes
+
+---
+
+## 📦 Project Structure
+
+```text
+lib/
+├── core/
+│   ├── constants/
+│   ├── services/
+│   └── utils/
+│
+├── models/
+│   ├── user_model.dart
+│   └── event_model.dart
+│
+├── screens/
+│   ├── auth/
+│   │   ├── login_page.dart
+│   │   └── register_page.dart
+│   │
+│   ├── admin/
+│   │   └── admin_dashboard.dart
+│   │
+│   ├── user/
+│   │   └── user_dashboard.dart
+│   │
+│   └── public/
+│       └── event_list.dart
+│
+├── widgets/
+│   ├── custom_button.dart
+│   └── form_fields.dart
+│
+└── main.dart
