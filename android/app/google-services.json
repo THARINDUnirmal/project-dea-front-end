@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "524937208157",
+    "project_id": "event-hub-a26f0",
+    "storage_bucket": "event-hub-a26f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524937208157:android:01f585ebe7ae4f8a1c88b4",
+        "android_client_info": {
+          "package_name": "com.example.even_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524937208157-76sning35opero2vockiggmmue13v15g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.even_hub",
+            "certificate_hash": "2c058a0aadb7c06d081d1307d3c30ad973708240"
+          }
+        },
+        {
+          "client_id": "524937208157-6iq5p8sqidqhr6gmegm0nqmn9sfc3mr8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtWqEC1ZuSYicESXLCNZNwvw81ftmOpsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524937208157-6iq5p8sqidqhr6gmegm0nqmn9sfc3mr8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
