@@ -20,7 +20,6 @@ class UsereDashboardScreen extends StatefulWidget {
 }
 
 class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
-  // 1. userData variable එක මෙතනට ගත්තා (State class එකේ මුලට)
   UserModel userData = UserModel(
     userId: 0,
     name: "name",
@@ -28,7 +27,6 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
     role: "role",
   );
 
-  // 2. initState එක ඇතුළේ async දාන්න බැහැ, ඒ නිසා වෙනම method එකක් call කරනවා
   @override
   void initState() {
     super.initState();
@@ -37,7 +35,6 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
 
   bool isLoading = false;
 
-  // 3. දත්ත ලබාගෙන setState කරන නිවැරදි ක්‍රමය
   Future<void> getCurrentUserDetails() async {
     UserModel data = await LocalStorageService().getUserData();
 
@@ -49,7 +46,6 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
   }
 
   void _showUpdateForm(BuildContext context, EventModel event) {
-    // Initialize controllers with the model's current properties
     final nameController = TextEditingController(text: event.title);
     final descController = TextEditingController(text: event.description);
     final eventImageController = TextEditingController(text: event.imageUrl);
@@ -90,7 +86,7 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
                     ),
                   ],
                 ),
-                // User ID Field - Displayed but NOT changeable
+
                 TextField(
                   controller: TextEditingController(
                     text: event.id.toInt().toString(),
@@ -162,13 +158,11 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
               child: const Text('Cancel'),
             ),
 
-            // Button එක ඇතුළේ
-            // මෙය class එකේ ඉහළින් variable එකක් ලෙස දාන්න
             ElevatedButton(
               onPressed: isLoading
                   ? null
                   : () async {
-                      print("🔘 Update Button Tapped!"); // Check 6
+                      print("🔘 Update Button Tapped!");
 
                       setState(() => isLoading = true);
 
@@ -195,21 +189,12 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
 
                       if (success) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("✅ සාර්ථකව යාවත්කාලීන විය!"),
-                          ),
+                          const SnackBar(content: Text("Update done!")),
                         );
-                        Navigator.pop(
-                          context,
-                          true,
-                        ); // කලින් screen එකට ගොස් refresh කරන්න
+                        Navigator.pop(context, true);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              "❌ Update එක අසාර්ථකයි. Console බලන්න.",
-                            ),
-                          ),
+                          const SnackBar(content: Text("Failed to Update")),
                         );
                       }
                     },
@@ -318,15 +303,13 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
 
                           if (success) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("✅ සාර්ථකව යාවත්කාලීන විය!"),
-                              ),
+                              const SnackBar(content: Text("Update Done!")),
                             );
                             Navigator.pop(context, true);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("❌ Update එක අසාර්ථකයි!"),
+                                content: Text("Failed to Update!"),
                               ),
                             );
                           }

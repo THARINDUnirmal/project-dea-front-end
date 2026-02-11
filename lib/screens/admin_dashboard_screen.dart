@@ -19,7 +19,6 @@ class AdminDashboardScreen extends StatefulWidget {
 }
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
-  // 1. userData variable එක මෙතනට ගත්තා (State class එකේ මුලට)
   UserModel userData = UserModel(
     userId: 0,
     name: "name",
@@ -28,14 +27,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   );
   bool isLoading = false;
 
-  // 2. initState එක ඇතුළේ async දාන්න බැහැ, ඒ නිසා වෙනම method එකක් call කරනවා
   @override
   void initState() {
     super.initState();
     getCurrentUserDetails();
   }
 
-  // 3. දත්ත ලබාගෙන setState කරන නිවැරදි ක්‍රමය
   Future<void> getCurrentUserDetails() async {
     UserModel data = await LocalStorageService().getUserData();
 
@@ -47,7 +44,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   }
 
   void _showUpdateForm(BuildContext context, EventModel event) {
-    // Initialize controllers with the model's current properties
     final nameController = TextEditingController(text: event.title);
     final descController = TextEditingController(text: event.description);
     final eventImageController = TextEditingController(text: event.imageUrl);
@@ -88,7 +84,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                     ),
                   ],
                 ),
-                // User ID Field - Displayed but NOT changeable
+
                 TextField(
                   controller: TextEditingController(
                     text: event.userId.toInt().toString(),
@@ -163,7 +159,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
               onPressed: isLoading
                   ? null
                   : () async {
-                      print("🔘 Update Button Tapped!"); // Check 6
+                      print("🔘 Update Button Tapped!");
 
                       setState(() => isLoading = true);
 
@@ -190,21 +186,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 
                       if (success) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("✅ සාර්ථකව යාවත්කාලීන විය!"),
-                          ),
+                          const SnackBar(content: Text("Update Done!")),
                         );
-                        Navigator.pop(
-                          context,
-                          true,
-                        ); // කලින් screen එකට ගොස් refresh කරන්න
+                        Navigator.pop(context, true);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              "❌ Update එක අසාර්ථකයි. Console බලන්න.",
-                            ),
-                          ),
+                          const SnackBar(content: Text("Failed to Update!")),
                         );
                       }
                     },
@@ -229,7 +216,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        // 1. Dialog එක ඇතුළේ state එක update කරන්න StatefulBuilder අවශ්‍යයි
         return StatefulBuilder(
           builder: (context, setDialogState) {
             return AlertDialog(
@@ -294,7 +280,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                       : () async {
                           print("🔘 Update Button Tapped!");
 
-                          // 2. Dialog එකේ loader එක පෙන්වන්න setDialogState භාවිතා කරන්න
                           setDialogState(() => isLoading = true);
 
                           Map<String, dynamic> updatedData = {
@@ -303,7 +288,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             "role": userRoleController.text,
                           };
 
-                          // 3. ApiServices හරහා updateUser කැඳවන්න
                           bool success = await UserServices().updateUser(
                             user.userId.toInt(),
                             updatedData,
@@ -317,10 +301,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                                 content: Text("✅ සාර්ථකව යාවත්කාලීන විය!"),
                               ),
                             );
-                            Navigator.pop(
-                              context,
-                              true,
-                            ); // true යවන්නේ ලැයිස්තුව refresh කිරීමටයි
+                            Navigator.pop(context, true);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -515,7 +496,6 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             child: Text("Error: ${snapshot.error}"),
                           );
                         } else {
-                          // 1. මෙතැනදී Map list එක UserModel list එකක් බවට හරවන්න
                           final List<UserModel> users = (snapshot.data as List)
                               .map((data) => UserModel.fromJson(data))
                               .toList();
@@ -524,8 +504,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                             itemCount: users.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              final user =
-                                  users[index]; // දැන් මෙය UserModel එකකි
+                              final user = users[index];
 
                               return InkWell(
                                 onTap: () {

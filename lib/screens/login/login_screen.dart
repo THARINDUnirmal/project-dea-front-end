@@ -1,11 +1,9 @@
 import 'dart:ui';
 import 'package:even_hub/main_screen.dart';
-import 'package:even_hub/models/user_model.dart';
 import 'package:even_hub/providers/index_change_provider.dart';
 import 'package:even_hub/providers/logo_provider.dart';
 import 'package:even_hub/screens/login/registater_screen.dart';
 import 'package:even_hub/services/auth_services.dart';
-import 'package:even_hub/services/user_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
           context,
         ).showSnackBar(const SnackBar(content: Text("Login Done!")));
       } else {
-        // Login අසාර්ථක නම් Message එකක් පෙන්වන්න
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Invalid Login Details!")),
@@ -60,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
     } catch (error) {
-      print("LOGIN ERROR: $error"); // මෙතන වැටෙන Error එක මට කියන්න
+      print("LOGIN ERROR: $error");
     } finally {
       if (mounted) setState(() => isLoading = false);
     }
@@ -73,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final width = constraints.maxWidth;
 
         final bool isMobile = width < 600;
-        final bool isTablet = width >= 600 && width < 1100;
+        // final bool isTablet = width >= 600 && width < 1100;
         return Container(
           decoration: BoxDecoration(
             color: Colors.transparent,
@@ -258,30 +255,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             InkWell(
-                              onTap: () async {
-                                // await AuthServices().googleSignInWeb();
-
-                                // UserModel newUser = UserModel(
-                                //   userId: AuthServices().getCurruntUser!.uid,
-                                //   name:
-                                //       AuthServices()
-                                //           .getCurruntUser!
-                                //           .displayName ??
-                                //       "Google User",
-                                //   email:
-                                //       AuthServices().getCurruntUser!.email ??
-                                //       "No Email",
-                                //   role: "User",
-                                // );
-
-                                // await UserServices().registerUser(newUser);
-                                // Navigator.pushReplacement(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => MainScreen(),
-                                //   ),
-                                // );
-                              },
+                              onTap: () async {},
                               child: svgWidget(
                                 isMobile: isMobile,
                                 svgUrl: "assets/icons/google-icon-logo.svg",
@@ -289,28 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             SizedBox(width: 20),
                             InkWell(
-                              onTap: () async {
-                                // await AuthServices().loginAsAnonymously();
-
-                                // UserModel newUser = UserModel(
-                                //   userId: AuthServices().getCurruntUser!.uid,
-                                //   name:
-                                //       AuthServices()
-                                //           .getCurruntUser!
-                                //           .displayName ??
-                                //       "Anonymous User",
-                                //   email:
-                                //       AuthServices().getCurruntUser!.email ??
-                                //       "No Email",
-                                //   role: "User",
-                                // );
-
-                                // await UserServices().registerUser(newUser);
-                                // Provider.of<IndexChangeProvider>(
-                                //   context,
-                                //   listen: false,
-                                // ).changePageIndex(index: 4);
-                              },
+                              onTap: () async {},
                               child: svgWidget(
                                 isMobile: isMobile,
                                 svgUrl: "assets/icons/hat-glasses.svg",

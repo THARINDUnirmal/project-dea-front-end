@@ -3,10 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  // Web වලදී localhost සමඟ 127.0.0.1 පාවිච්චි කිරීම වඩාත් විශ්වාසදායකයි
   final String baseUrl = "http://localhost:8080/api/auth";
 
-  // --- Register Function ---
+  //Register
   Future<bool> register(String name, String email, String password) async {
     try {
       final response = await http.post(
@@ -24,7 +23,6 @@ class AuthService {
       print("Register Body: ${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // Register වුණාට පස්සේ කෙලින්ම Login කරමු
         return await login(name, password);
       }
       return false;
@@ -34,7 +32,7 @@ class AuthService {
     }
   }
 
-  // --- Login Function ---
+  //Login
   Future<bool> login(String username, String password) async {
     try {
       print("Attempting login for: $username");
@@ -48,7 +46,6 @@ class AuthService {
         body: jsonEncode({"userName": username, "password": password}),
       );
 
-      // Console එකේ මේ ටික බලන්න
       print("Login Status Code: ${response.statusCode}");
       print("Login Response Body: ${response.body}");
 
@@ -57,8 +54,6 @@ class AuthService {
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-        // Token එක සහ User විස්තර Save කිරීම
-        // Backend එකෙන් එන Key names (token, id, username) නිවැරදිදැයි පරීක්ෂා කරන්න
         await prefs.setString('token', data['token'] ?? '');
         await prefs.setInt('userId', data['id'] ?? 0);
         await prefs.setString('userName', data['username'] ?? '');
@@ -75,7 +70,6 @@ class AuthService {
         return false;
       }
     } catch (e) {
-      // Connection එකේ ප්‍රශ්නයක් නම් මෙතන ප්‍රින්ට් වෙයි
       print("Login Connection Error: $e");
       return false;
     }

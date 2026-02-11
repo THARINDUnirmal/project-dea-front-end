@@ -4,6 +4,7 @@ import 'package:even_hub/screens/new_event_add_screen.dart';
 import 'package:even_hub/screens/single_data_screen.dart';
 import 'package:even_hub/services/api_services.dart';
 import 'package:even_hub/widgets/card_widget.dart';
+import 'package:even_hub/widgets/glass_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,23 +48,32 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Event Management Made Effortless",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                          fontSize: isMobile ? 40 : 50,
-                          fontWeight: FontWeight.bold,
+                      GlassText(
+                        cardWidth: 0.65,
+                        textWidget: Text(
+                          "Event Management Made Effortless",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Colors.white,
+                                fontSize: isMobile ? 40 : 50,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ),
                       SizedBox(height: 10),
-                      Text(
-                        "Plan, organize, and manage your events with ease. Our platform helps you handle everything from scheduling to coordination, all in one place.",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                      GlassText(
+                        cardWidth: 0.5,
+                        textWidget: Text(
+                          "Plan, organize, and manage your events with ease. Our platform helps you handle everything from scheduling to coordination, all in one place.",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                         ),
                       ),
+
                       SizedBox(height: 30),
 
                       Row(
@@ -93,31 +103,18 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 10),
-                          // SizedBox(
-                          //   width: 400,
-                          //   child: TextField(
-                          //     enabled: true,
-                          //     readOnly: false,
-                          //     keyboardType: TextInputType.name,
-                          //     decoration: InputDecoration(
-                          //       filled: true,
-                          //       hintText: "Search",
-                          //       fillColor: Colors.white,
-                          //       border: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                       SizedBox(height: 30),
-                      Text(
-                        "UpComming Events",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
+                      GlassText(
+                        cardWidth: 0.2,
+                        textWidget: Text(
+                          "UpComming Events",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
+
                       SizedBox(height: 20),
 
                       FutureBuilder(

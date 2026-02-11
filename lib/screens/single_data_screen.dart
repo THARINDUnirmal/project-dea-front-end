@@ -193,22 +193,6 @@ class SingleDataScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 10),
-                          // SizedBox(
-                          //   width: 400,
-                          //   child: TextField(
-                          //     enabled: true,
-                          //     readOnly: false,
-                          //     keyboardType: TextInputType.name,
-                          //     decoration: InputDecoration(
-                          //       filled: true,
-                          //       hintText: "Search",
-                          //       fillColor: Colors.white,
-                          //       border: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                       SizedBox(height: 50),

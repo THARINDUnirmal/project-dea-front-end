@@ -22,10 +22,7 @@ class ContactServices {
 
   //telephone
   Future<void> openPhoneCall() async {
-    final Uri phoneUri = Uri(
-      scheme: 'tel',
-      path: '+94703814047', // your number
-    );
+    final Uri phoneUri = Uri(scheme: 'tel', path: '+94703814047');
 
     if (await canLaunchUrl(phoneUri)) {
       await launchUrl(phoneUri);

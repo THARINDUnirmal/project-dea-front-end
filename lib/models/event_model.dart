@@ -64,9 +64,7 @@ class EventModel {
       "contactDetails": contactInfo,
       "userId": userId,
       "speakers": speakers
-          .map(
-            (speaker) => {"name": speaker.name, "imageUrl": speaker.imageUrl},
-          )
+          .map((speaker) => {"name": speaker.name, "image": speaker.imageUrl})
           .toList(),
     };
   }

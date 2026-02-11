@@ -2,6 +2,7 @@ import 'package:even_hub/models/event_model.dart';
 import 'package:even_hub/screens/new_event_add_screen.dart';
 import 'package:even_hub/services/api_services.dart';
 import 'package:even_hub/widgets/card_widget.dart';
+import 'package:even_hub/widgets/glass_text.dart';
 import 'package:flutter/material.dart';
 
 class AllEventScreen extends StatefulWidget {
@@ -46,21 +47,29 @@ class _AllEventScreenState extends State<AllEventScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Explore Events",
-                      style: Theme.of(context).textTheme.headlineLarge!
-                          .copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    GlassText(
+                      cardWidth: 0.2,
+                      textWidget: Text(
+                        "Explore Events",
+                        style: Theme.of(context).textTheme.headlineLarge!
+                            .copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
+
                     const SizedBox(height: 10),
-                    Text(
-                      "Discover Your Next Experience",
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyLarge!.copyWith(color: Colors.white),
+                    GlassText(
+                      cardWidth: 0.3,
+                      textWidget: Text(
+                        "Discover Your Next Experience",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyLarge!.copyWith(color: Colors.white),
+                      ),
                     ),
+
                     const SizedBox(height: 20),
 
                     // ACTION ROW (RESPONSIVE)
@@ -96,16 +105,18 @@ class _AllEventScreenState extends State<AllEventScreen> {
                                 child: _createButton(context),
                               ),
                               const SizedBox(width: 20),
-                              //  SizedBox(width: 300, child: _searchField()),
                             ],
                           ),
 
                     const SizedBox(height: 30),
-                    Text(
-                      "What’s Coming Up",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: Colors.white70,
-                        fontWeight: FontWeight.bold,
+                    GlassText(
+                      cardWidth: 0.15,
+                      textWidget: Text(
+                        "What’s Coming Up",
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

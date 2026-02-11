@@ -39,14 +39,14 @@ class ApiServices {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
       },
-      body: json.encode(event.toJson()), // EventModel එක JSON වලට හරවා යැවීම
+      body: json.encode(event.toJson()),
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      return true; // සාර්ථකයි
+      return true;
     } else {
       print("Error: ${response.body}");
-      return false; // අසාර්ථකයි
+      return false;
     }
   }
 
@@ -56,9 +56,7 @@ class ApiServices {
     String? token = prefs.getString('token');
 
     final response = await http.get(
-      Uri.parse(
-        'http://localhost:8080/api/events/my-events',
-      ), // Backend Endpoint එක
+      Uri.parse('http://localhost:8080/api/events/my-events'),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
@@ -69,12 +67,12 @@ class ApiServices {
       List data = json.decode(response.body);
       return data.map((e) => EventModel.fromJson(e)).toList();
     } else {
-      return []; // වැරද්දක් වුණොත් හිස් ලිස්ට් එකක් එවන්න
+      return [];
     }
   }
 
   Future<bool> updateEvent(EventModel event) async {
-    print("🔄 Update Process Started for Event ID: ${event.id}"); // Check 1
+    print("🔄 Update Process Started for Event ID: ${event.id}");
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('token');
@@ -85,7 +83,7 @@ class ApiServices {
         return false;
       }
 
-      print("📡 Sending PUT request to: $baseUrl/${event.id}"); // Check 2
+      print("📡 Sending PUT request to: $baseUrl/${event.id}");
 
       final response = await http.put(
         Uri.parse('$baseUrl/${event.id}'),
@@ -96,17 +94,17 @@ class ApiServices {
         body: jsonEncode(event.toJson()),
       );
 
-      print("📊 Response Status Code: ${response.statusCode}"); // Check 3
-      print("📋 Response Body: ${response.body}"); // Check 4
+      print("📊 Response Status Code: ${response.statusCode}");
+      print("📋 Response Body: ${response.body}");
 
       return response.statusCode == 200;
     } catch (e) {
-      print("❌ Exception Caught: $e"); // Check 5
+      print("❌ Exception Caught: $e");
       return false;
     }
   }
 
-  // --- Delete Event Method ---
+  // Delete Event
   Future<bool> deleteEvent(int eventId) async {
     print("🗑️ Deleting Event ID: $eventId");
     try {
