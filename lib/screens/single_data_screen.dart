@@ -1,5 +1,6 @@
 import 'package:even_hub/models/event_model.dart';
 import 'package:even_hub/models/speaker_model.dart';
+import 'package:even_hub/services/ticket_services.dart';
 import 'package:flutter/material.dart';
 
 class SingleDataScreen extends StatelessWidget {
@@ -106,7 +107,14 @@ class SingleDataScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              TicketServices().downloadTicketPDF(
+                eventName: singleEventData.title,
+                userName: singleEventData.id.toString(),
+                ticketId: "EVT-${singleEventData.id.toString()}",
+                eventDate: singleEventData.date,
+              );
+            },
             child: const Text("Buy Ticket"),
           ),
         ),

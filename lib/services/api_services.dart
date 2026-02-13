@@ -18,7 +18,7 @@ class ApiServices {
             .map((e) => EventModel.fromJson(e))
             .toList();
 
-        await Future.delayed(Duration(seconds: 3));
+        await Future.delayed(Duration(seconds: 2));
 
         return allData;
       } else {
