@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                 listen: false,
               ).changePageIndex(index: 4);
             },
-            //todo
+
             child: Consumer(
               builder: (context, LogoProvider provider, child) {
                 return CircleAvatar(

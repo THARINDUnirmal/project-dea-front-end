@@ -76,7 +76,6 @@ class _AnimatedGradientFooterState extends State<AnimatedGradientFooter>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // TOP SECTION
                   isMobile
                       ? _MobileFooterTop()
                       : _DesktopFooterTop(isTablet: isTablet),
@@ -85,7 +84,6 @@ class _AnimatedGradientFooterState extends State<AnimatedGradientFooter>
                   Container(height: 1, color: Colors.white10),
                   const SizedBox(height: 20),
 
-                  // BOTTOM BAR
                   isMobile
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +143,6 @@ class _DesktopFooterTop extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Brand
         Expanded(
           flex: 2,
           child: Column(

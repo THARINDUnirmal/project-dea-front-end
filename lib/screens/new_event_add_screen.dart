@@ -201,7 +201,7 @@ class _NewEventAddScreenState extends State<NewEventAddScreen> {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
           final bool isMobile = width < 600;
-          final bool isTablet = width >= 600 && width < 1100;
+          //final bool isTablet = width >= 600 && width < 1100;
 
           return Container(
             width: double.infinity,

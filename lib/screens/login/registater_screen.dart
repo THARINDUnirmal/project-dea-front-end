@@ -71,7 +71,7 @@ class _RegistaterScreenState extends State<RegistaterScreen> {
         final width = constraints.maxWidth;
 
         final bool isMobile = width < 600;
-        final bool isTablet = width >= 600 && width < 1100;
+        // final bool isTablet = width >= 600 && width < 1100;
         return Container(
           decoration: BoxDecoration(
             color: Colors.transparent,

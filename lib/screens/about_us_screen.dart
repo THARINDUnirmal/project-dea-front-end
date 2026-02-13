@@ -8,13 +8,11 @@ class AboutUsScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-
         final bool isMobile = width < 600;
-        //final bool isTablet = width >= 600 && width < 1100;
 
         return Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
@@ -24,39 +22,43 @@ class AboutUsScreen extends StatelessWidget {
           ),
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 50),
+                const SizedBox(height: 30),
+
                 Center(
                   child: Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: isMobile ? width * 0.95 : width * 0.75,
                     padding: EdgeInsets.all(isMobile ? 20 : 50),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white.withOpacity(0.95),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(blurRadius: 20, color: Colors.black26),
+                      ],
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "About Us",
-                          style: Theme.of(context).textTheme.bodyLarge!
+                          "About EventHub",
+                          style: Theme.of(context).textTheme.headlineLarge!
                               .copyWith(
                                 color: Colors.black,
-                                fontSize: isMobile ? 30 : 50,
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
-                        SizedBox(height: 10),
+
+                        const SizedBox(height: 15),
+
                         Text(
-                          "EventHub is designed tont to simpiify simpiify event manneryone, from small meet-up to laugh amencrabe throple experiences. Our mision 'te hliade We helpe itieipds organizers worldwide",
+                          "EventHub is a modern event management platform designed to simplify event planning for everyone — from small meetups to large-scale experiences. "
+                          "Our mission is to empower organizers with powerful tools to create, manage, and promote events effortlessly.",
                           style: Theme.of(context).textTheme.bodyLarge!
-                              .copyWith(
-                                color: Colors.black45,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              .copyWith(color: Colors.black87, height: 1.6),
                         ),
-                        SizedBox(height: 20),
+
+                        const SizedBox(height: 40),
+
                         Text(
                           "Meet Our Team",
                           style: Theme.of(context).textTheme.headlineSmall!
@@ -65,83 +67,32 @@ class AboutUsScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                         ),
-                        SizedBox(height: 20),
-                        //todo: Team Members
+
+                        const SizedBox(height: 25),
+
                         isMobile
-                            ? Center(
-                                child: Column(
-                                  children: [
-                                    profileCard(
-                                      context: context,
-                                      ismobile: isMobile,
-                                      name: "Tharindu",
-                                      imageUrl: "assets/images/user.jpg",
-                                      possition: "CEO",
-                                      otherDetails: "None",
-                                    ),
-                                    SizedBox(height: 20),
-                                    profileCard(
-                                      context: context,
-                                      ismobile: isMobile,
-                                      name: "Tharindu",
-                                      imageUrl: "assets/images/user.jpg",
-                                      possition: "CEO",
-                                      otherDetails: "None",
-                                    ),
-                                    SizedBox(height: 20),
-                                    profileCard(
-                                      context: context,
-                                      ismobile: isMobile,
-                                      name: "Tharindu",
-                                      imageUrl: "assets/images/user.jpg",
-                                      possition: "CEO",
-                                      otherDetails: "None",
-                                    ),
-                                    SizedBox(height: 20),
-                                    profileCard(
-                                      context: context,
-                                      ismobile: isMobile,
-                                      name: "Tharindu",
-                                      imageUrl: "assets/images/user.jpg",
-                                      possition: "CEO",
-                                      otherDetails: "None",
-                                    ),
-                                    SizedBox(height: 20),
-                                  ],
-                                ),
-                              )
-                            : Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                            ? Column(
                                 children: [
-                                  profileCard(
-                                    context: context,
-                                    ismobile: isMobile,
-                                    name: "Tharindu",
-                                    imageUrl: "assets/images/user.jpg",
-                                    possition: "CEO",
-                                    otherDetails: "None",
+                                  ..._teamMembers(context, isMobile),
+                                  ..._teamMembers2(context, isMobile),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: _teamMembers(context, isMobile),
                                   ),
-                                  SizedBox(width: 30),
-                                  profileCard(
-                                    ismobile: isMobile,
-                                    context: context,
-                                    name: "Tharindu",
-                                    imageUrl: "assets/images/user.jpg",
-                                    possition: "CEO",
-                                    otherDetails: "None",
-                                  ),
-                                  SizedBox(width: 30),
-                                  profileCard(
-                                    ismobile: isMobile,
-                                    context: context,
-                                    name: "Tharindu",
-                                    imageUrl: "assets/images/user.jpg",
-                                    possition: "CEO",
-                                    otherDetails: "None",
+                                  SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: _teamMembers2(context, isMobile),
                                   ),
                                 ],
                               ),
-                        SizedBox(height: 50),
+
+                        const SizedBox(height: 50),
+
                         Text(
                           "Our Other Projects",
                           style: Theme.of(context).textTheme.headlineSmall!
@@ -151,72 +102,21 @@ class AboutUsScreen extends StatelessWidget {
                               ),
                         ),
 
-                        //todo: projects
-                        SizedBox(height: 20),
+                        const SizedBox(height: 25),
+
                         isMobile
-                            ? Center(
-                                child: Column(
-                                  children: [
-                                    projectCard(
-                                      context: context,
-                                      isMobile: isMobile,
-                                      description: "No Description",
-                                      title: "No Title",
-                                    ),
-                                    SizedBox(height: 20),
-                                    projectCard(
-                                      context: context,
-                                      isMobile: isMobile,
-                                      description: "No Description",
-                                      title: "No Title",
-                                    ),
-                                    SizedBox(height: 20),
-                                    projectCard(
-                                      context: context,
-                                      isMobile: isMobile,
-                                      description: "No Description",
-                                      title: "No Title",
-                                    ),
-                                    SizedBox(height: 20),
-                                    projectCard(
-                                      context: context,
-                                      isMobile: isMobile,
-                                      description: "No Description",
-                                      title: "No Title",
-                                    ),
-                                    SizedBox(height: 20),
-                                  ],
-                                ),
-                              )
+                            ? Column(children: _projects(context, isMobile))
                             : Row(
-                                children: [
-                                  projectCard(
-                                    context: context,
-                                    isMobile: isMobile,
-                                    description: "No Description",
-                                    title: "No Title",
-                                  ),
-                                  SizedBox(width: 20),
-                                  projectCard(
-                                    context: context,
-                                    isMobile: isMobile,
-                                    description: "No Description",
-                                    title: "No Title",
-                                  ),
-                                  SizedBox(width: 20),
-                                  projectCard(
-                                    context: context,
-                                    isMobile: isMobile,
-                                    description: "No Description",
-                                    title: "No Title",
-                                  ),
-                                ],
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: _projects(context, isMobile),
                               ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 50),
+
+                const SizedBox(height: 80),
               ],
             ),
           ),
@@ -225,67 +125,128 @@ class AboutUsScreen extends StatelessWidget {
     );
   }
 
+  List<Widget> _teamMembers(BuildContext context, bool isMobile) {
+    return [
+      profileCard(
+        context: context,
+        isMobile: isMobile,
+        name: "Tharindu Nirmal",
+        position: "Founder & Developer",
+        imageUrl: "assets/images/user.jpg",
+        details: "Flutter | Web | Backend",
+      ),
+      const SizedBox(width: 25, height: 25),
+      profileCard(
+        context: context,
+        isMobile: isMobile,
+        name: "Poora Nyanajith",
+        position: "UI/UX Designer",
+        imageUrl: "assets/images/Poorna.jpg",
+        details: "Design & Branding",
+      ),
+      const SizedBox(width: 25, height: 25),
+      profileCard(
+        context: context,
+        isMobile: isMobile,
+        name: "Nthmi",
+        position: "Project Manager",
+        imageUrl: "assets/images/Nethmi.jpg",
+        details: "Planning & Strategy",
+      ),
+    ];
+  }
+
+  List<Widget> _teamMembers2(BuildContext context, bool isMobile) {
+    return [
+      profileCard(
+        context: context,
+        isMobile: isMobile,
+        name: "Ruby",
+        position: "Founder & Developer",
+        imageUrl: "assets/images/Rudy.jpg",
+        details: "Backend",
+      ),
+      const SizedBox(width: 25, height: 25),
+      profileCard(
+        context: context,
+        isMobile: isMobile,
+        name: "Team Member",
+        position: "UI/UX Designer",
+        imageUrl: "assets/images/Kusal.jpg",
+        details: "Design & Branding",
+      ),
+      // const SizedBox(width: 25, height: 25),
+      // profileCard(
+      //   context: context,
+      //   isMobile: isMobile,
+      //   name: "Team Member",
+      //   position: "Project Manager",
+      //   imageUrl: "assets/images/user.jpg",
+      //   details: "Planning & Strategy",
+      // ),
+    ];
+  }
+
   Widget profileCard({
-    required bool ismobile,
+    required bool isMobile,
     required BuildContext context,
     required String imageUrl,
-    required String possition,
-    required String otherDetails,
+    required String position,
+    required String details,
     required String name,
   }) {
     return Container(
-      width: ismobile
-          ? MediaQuery.of(context).size.width * 0.5
-          : MediaQuery.of(context).size.width * 0.15,
-      padding: EdgeInsets.all(10),
+      width: isMobile ? double.infinity : 220,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10,
-            color: Colors.black26,
-            offset: Offset(1, 2),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [BoxShadow(blurRadius: 10, color: Colors.black26)],
       ),
       child: Column(
         children: [
-          CircleAvatar(
-            radius: 50,
-            child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(50),
-              child: Image.asset(imageUrl, fit: BoxFit.cover),
-            ),
-          ),
-          SizedBox(height: 10),
+          CircleAvatar(radius: 45, backgroundImage: AssetImage(imageUrl)),
+          const SizedBox(height: 15),
           Text(
             name,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
+          Text(position, style: const TextStyle(color: Colors.black54)),
+          const SizedBox(height: 5),
           Text(
-            possition,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Colors.black45,
-              fontWeight: FontWeight.bold,
-            ),
+            details,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.black45),
           ),
-          SizedBox(height: 5),
-          Text(
-            otherDetails,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Colors.black54,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 30),
         ],
       ),
     );
+  }
+
+  List<Widget> _projects(BuildContext context, bool isMobile) {
+    return [
+      projectCard(
+        context: context,
+        isMobile: isMobile,
+        title: "Budget Tracker",
+        description: "Track expenses and incomes easily",
+      ),
+      projectCard(
+        context: context,
+        isMobile: isMobile,
+        title: "Social Media App",
+        description: "Connect people with modern features",
+      ),
+      projectCard(
+        context: context,
+        isMobile: isMobile,
+        title: "Video Converter",
+        description: "Convert videos quickly and easily",
+      ),
+    ];
   }
 
   Widget projectCard({
@@ -295,54 +256,27 @@ class AboutUsScreen extends StatelessWidget {
     required String description,
   }) {
     return Container(
-      width: isMobile
-          ? MediaQuery.of(context).size.width * 0.6
-          : MediaQuery.of(context).size.width * 0.2,
-      padding: EdgeInsets.all(10),
+      width: isMobile ? double.infinity : 260,
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color.fromARGB(255, 245, 77, 97),
-            Color.fromARGB(255, 112, 79, 241),
-          ],
+        gradient: const LinearGradient(
+          colors: [Color(0xff9046b9), Color(0xff5e2b97)],
         ),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10,
-            color: Colors.black26,
-            offset: Offset(1, 2),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: const [BoxShadow(blurRadius: 12, color: Colors.black26)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              CircleAvatar(radius: 40),
-              SizedBox(width: 10),
-              Text(
-                textAlign: TextAlign.center,
-                title,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5),
           Text(
-            description,
+            title,
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Colors.white60,
-              fontWeight: FontWeight.normal,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 10),
+          Text(description, style: const TextStyle(color: Colors.white70)),
         ],
       ),
     );

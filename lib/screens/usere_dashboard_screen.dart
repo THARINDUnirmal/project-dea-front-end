@@ -523,13 +523,13 @@ class _UsereDashboardScreenState extends State<UsereDashboardScreen> {
                                 );
                               } else if (snapshot.hasError) {
                                 return Center(
-                                  child: Text("දෝෂයකි: ${snapshot.error}"),
+                                  child: Text("Error: ${snapshot.error}"),
                                 );
                               } else if (!snapshot.hasData ||
                                   snapshot.data!.isEmpty) {
                                 return const Center(
                                   child: Text(
-                                    "ඔබ තවමත් කිසිදු Event එකක් සාදා නැත.",
+                                    "No Events Data Found! Pleace create Event!",
                                   ),
                                 );
                               }

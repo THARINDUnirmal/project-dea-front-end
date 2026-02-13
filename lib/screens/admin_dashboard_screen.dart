@@ -298,14 +298,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           if (success) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("✅ සාර්ථකව යාවත්කාලීන විය!"),
+                                content: Text("Updated successful "),
                               ),
                             );
                             Navigator.pop(context, true);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("❌ Update එක අසාර්ථකයි!"),
+                                content: Text("❌ Error: Update unsuccessful"),
                               ),
                             );
                           }
@@ -563,12 +563,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                           );
                         } else if (snapshot.hasError) {
                           return Center(
-                            child: Text("දෝෂයකි: ${snapshot.error}"),
+                            child: Text("Error: ${snapshot.error}"),
                           );
                         } else if (!snapshot.hasData ||
                             snapshot.data!.isEmpty) {
                           return const Center(
-                            child: Text("ඔබ තවමත් කිසිදු Event එකක් සාදා නැත."),
+                            child: Text(
+                              "No Events Data Found! Pleace create Event!",
+                            ),
                           );
                         }
 

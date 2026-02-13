@@ -38,246 +38,138 @@ class _AllEventScreenState extends State<AllEventScreen> {
               ),
             ),
           ),
-          child: Column(
-            children: [
-              const SizedBox(height: 50),
-              Container(
-                width: width * (isMobile ? 0.95 : 0.8),
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    GlassText(
-                      cardWidth: 0.2,
-                      textWidget: Text(
-                        "Explore Events",
-                        style: Theme.of(context).textTheme.headlineLarge!
-                            .copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
 
-                    const SizedBox(height: 10),
-                    GlassText(
-                      cardWidth: 0.3,
-                      textWidget: Text(
-                        "Discover Your Next Experience",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge!.copyWith(color: Colors.white),
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
-
-                    // ACTION ROW (RESPONSIVE)
-                    isMobile
-                        ? Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => NewEventAddScreen(),
-                                    ),
-                                  );
-                                },
-                                child: _createButton(context),
+                Container(
+                  width: width * (isMobile ? 0.95 : 0.8),
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GlassText(
+                        cardWidth: 0.25,
+                        textWidget: Text(
+                          "Explore Events",
+                          style: Theme.of(context).textTheme.headlineLarge!
+                              .copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
                               ),
-                              const SizedBox(height: 10),
-                              // _searchField(),
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => NewEventAddScreen(),
-                                    ),
-                                  );
-                                },
-                                child: _createButton(context),
-                              ),
-                              const SizedBox(width: 20),
-                            ],
-                          ),
-
-                    const SizedBox(height: 30),
-                    GlassText(
-                      cardWidth: 0.15,
-                      textWidget: Text(
-                        "What’s Coming Up",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
+
+                      const SizedBox(height: 12),
+
+                      GlassText(
+                        cardWidth: 0.4,
+                        textWidget: Text(
+                          "Discover, join, and manage amazing experiences",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(color: Colors.white70),
+                        ),
+                      ),
+
+                      const SizedBox(height: 25),
+
+                      isMobile
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [_createButton(context)],
+                            )
+                          : Row(children: [_createButton(context)]),
+
+                      const SizedBox(height: 35),
+
+                      GlassText(
+                        cardWidth: 0.18,
+                        textWidget: Text(
+                          "All Events",
+                          style: Theme.of(context).textTheme.bodyLarge!
+                              .copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Container(
+                    width: isMobile
+                        ? double.infinity
+                        : MediaQuery.of(context).size.width * 0.8,
+                    padding: const EdgeInsets.all(25),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(color: Colors.white24),
                     ),
-                  ],
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Container(
-                  width: isMobile
-                      ? double.infinity
-                      : MediaQuery.of(context).size.width * 0.8,
-                  height: isMobile
-                      ? MediaQuery.of(context).size.width * 0.8
-                      : MediaQuery.of(context).size.width * 0.3,
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 102, 96, 96),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: FutureBuilder(
-                    future: ApiServices().getAllData(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.1,
-                            height: MediaQuery.of(context).size.width * 0.1,
-                            padding: EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10,
-                                  color: Colors.black,
-                                  offset: Offset(1, 2),
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(15),
-                            ),
+                    child: FutureBuilder(
+                      future: ApiServices().getAllData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
                             child: CircularProgressIndicator(),
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text(snapshot.error.toString()));
-                      } else if (!snapshot.hasData) {
-                        return Text(
-                          "No Data Found!",
-                          style: TextStyle(color: Colors.black),
-                        );
-                      } else {
+                          );
+                        }
+
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                              snapshot.error.toString(),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          );
+                        }
+
+                        if (!snapshot.hasData ||
+                            (snapshot.data as List).isEmpty) {
+                          return _emptyState(context);
+                        }
+
                         List<EventModel> allData = snapshot.data ?? [];
-                        return allData.isEmpty
-                            ? Center(
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: const Color.fromARGB(
-                                      255,
-                                      141,
-                                      134,
-                                      134,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(height: 20),
-                                        Text(
-                                          textAlign: TextAlign.center,
-                                          "No Data Found!\nYou Can Add Event Data",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .copyWith(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        SizedBox(height: 20),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    NewEventAddScreen(),
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            width: 200,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xff9046b9),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                "Create New Event",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyLarge!
-                                                    .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(height: 20),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                child: GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: ScrollPhysics(),
-                                  itemCount: allData.length,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: gridCount,
-                                        crossAxisSpacing: 20,
-                                        mainAxisSpacing: 20,
-                                        childAspectRatio: isMobile ? 0.9 : 1,
-                                      ),
-                                  itemBuilder: (context, index) {
-                                    final data = allData[index];
-                                    return InkWell(
-                                      onTap: () {
-                                        //todo
-                                      },
-                                      child: CardWidget(
-                                        isMobile: isMobile,
-                                        cardTitle: data.title,
-                                        cardDescription: data.description,
-                                        cardImage: data.imageUrl,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                      }
-                    },
+
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: allData.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: gridCount,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: isMobile ? 0.9 : 1,
+                              ),
+                          itemBuilder: (context, index) {
+                            final data = allData[index];
+                            return InkWell(
+                              onTap: () {
+                                // TODO: Navigate to event details
+                              },
+                              child: CardWidget(
+                                isMobile: isMobile,
+                                cardTitle: data.title,
+                                cardDescription: data.description,
+                                cardImage: data.imageUrl,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 50),
-            ],
+                const SizedBox(height: 80),
+              ],
+            ),
           ),
         );
       },
@@ -285,20 +177,60 @@ class _AllEventScreenState extends State<AllEventScreen> {
   }
 
   Widget _createButton(BuildContext context) {
-    return Container(
-      height: 45,
-      width: 200,
-      decoration: BoxDecoration(
-        color: const Color(0xff9046b9),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Center(
-        child: Text(
-          "Start Your Event",
-          style: Theme.of(
-            context,
-          ).textTheme.bodyLarge!.copyWith(color: Colors.white),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NewEventAddScreen()),
+        );
+      },
+      child: Container(
+        height: 48,
+        width: 220,
+        decoration: BoxDecoration(
+          color: const Color(0xff9046b9),
+          borderRadius: BorderRadius.circular(14),
         ),
+        child: Center(
+          child: Text(
+            "Start Your Event",
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge!.copyWith(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _emptyState(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(40),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          const Icon(Icons.event_busy, size: 60),
+          const SizedBox(height: 15),
+          const Text(
+            "No Events Available",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          const Text("Create your first event and get started."),
+          const SizedBox(height: 25),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NewEventAddScreen()),
+              );
+            },
+            child: const Text("Create Event"),
+          ),
+        ],
       ),
     );
   }
