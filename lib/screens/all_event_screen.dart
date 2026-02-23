@@ -1,5 +1,6 @@
 import 'package:even_hub/models/event_model.dart';
 import 'package:even_hub/screens/new_event_add_screen.dart';
+import 'package:even_hub/screens/single_data_screen.dart';
 import 'package:even_hub/services/api_services.dart';
 import 'package:even_hub/widgets/card_widget.dart';
 import 'package:even_hub/widgets/glass_text.dart';
@@ -151,7 +152,13 @@ class _AllEventScreenState extends State<AllEventScreen> {
                             final data = allData[index];
                             return InkWell(
                               onTap: () {
-                                // TODO: Navigate to event details
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        SingleDataScreen(singleEventData: data),
+                                  ),
+                                );
                               },
                               child: CardWidget(
                                 isMobile: isMobile,
